@@ -24,6 +24,26 @@ h1 {
     color: #333;
 }
 
+#timer {
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #ff4500;
+}
+
+#progress-bar {
+    background: #e9ecef;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+#progress {
+    background: #007bff;
+    height: 10px;
+    width: 0;
+    transition: width 0.4s ease;
+}
+
 #quiz {
     margin-bottom: 20px;
 }
@@ -49,8 +69,14 @@ h1 {
     transition: background 0.3s ease;
 }
 
-.answers label:hover {
-    background: #e9ecef;
+.answers input[type="radio"] {
+    margin-right: 10px;
+}
+
+.answers input[type="radio"]:checked + label {
+    background-color: #d1e7dd;
+    border-color: #b6d4fe;
+    color: #0f5132;
 }
 
 button {
@@ -66,6 +92,11 @@ button {
 
 button:hover {
     background-color: #0056b3;
+}
+
+button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
 }
 
 #results {

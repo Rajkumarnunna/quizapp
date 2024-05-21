@@ -1,6 +1,7 @@
 const quizContainer = document.getElementById('quiz');
 const resultsContainer = document.getElementById('results');
 const submitButton = document.getElementById('submit');
+const timerElement = document.getElementById('time');
 
 const quizQuestions = [
     {
@@ -32,18 +33,13 @@ const quizQuestions = [
     }
 ];
 
-function shuffle(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-}
+let timer;
+let attempts = 0;
+const maxAttempts = 3;
 
 function buildQuiz() {
     const output = [];
-
-    shuffle(quizQuestions).forEach((currentQuestion, questionNumber) => {
+    quizQuestions.forEach((currentQuestion, questionNumber) => {
         const answers = [];
         for (letter in currentQuestion.answers) {
             answers.push(
@@ -59,19 +55,16 @@ function buildQuiz() {
             <div class="answers">${answers.join('')}</div>`
         );
     });
-
     quizContainer.innerHTML = output.join('');
 }
 
 function showResults() {
     const answerContainers = quizContainer.querySelectorAll('.answers');
     let numCorrect = 0;
-
     quizQuestions.forEach((currentQuestion, questionNumber) => {
         const answerContainer = answerContainers[questionNumber];
         const selector = `input[name=question${questionNumber}]:checked`;
         const userAnswer = (answerContainer.querySelector(selector) || {}).value;
-
         if (userAnswer === currentQuestion.correctAnswer) {
             numCorrect++;
             answerContainers[questionNumber].style.color = 'green';
@@ -79,10 +72,33 @@ function showResults() {
             answerContainers[questionNumber].style.color = 'red';
         }
     });
-
     resultsContainer.innerHTML = `${numCorrect} out of ${quizQuestions.length}`;
+    clearInterval(timer); // Stop the timer when results are shown
+    attempts++;
+    if (attempts >= maxAttempts) {
+        submitButton.disabled = true;
+        resultsContainer.innerHTML += "<br>You have reached the maximum number of attempts.";
+    } else {
+        // Reset the timer and allow for another attempt
+        startTimer();
+    }
+}
+
+function startTimer() {
+    let timeLeft = 60;
+    timerElement.textContent = timeLeft;
+    clearInterval(timer); // Clear any existing timer
+    timer = setInterval(() => {
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            showResults();
+        } else {
+            timeLeft--;
+            timerElement.textContent = timeLeft;
+        }
+    }, 1000);
 }
 
 buildQuiz();
-
+startTimer();
 submitButton.addEventListener('click', showResults);
