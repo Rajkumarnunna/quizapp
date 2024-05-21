@@ -1,3 +1,6 @@
+/* Modern Design Styles */
+
+/* Base Styles */
 body {
     font-family: 'Roboto', sans-serif;
     background-color: #f0f2f5;
@@ -9,8 +12,9 @@ body {
     padding: 20px;
 }
 
+/* Quiz Container */
 .quiz-container {
-    background: white;
+    background: #ffffff;
     border-radius: 15px;
     padding: 30px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -19,17 +23,21 @@ body {
     text-align: center;
 }
 
+/* Heading Styles */
 h1 {
     margin-bottom: 20px;
     color: #333;
+    font-size: 24px;
 }
 
+/* Timer Styles */
 #timer {
     margin-bottom: 20px;
     font-weight: bold;
     color: #ff4500;
 }
 
+/* Progress Bar Styles */
 #progress-bar {
     background: #e9ecef;
     border-radius: 5px;
@@ -44,6 +52,7 @@ h1 {
     transition: width 0.4s ease;
 }
 
+/* Quiz Question Styles */
 #quiz {
     margin-bottom: 20px;
 }
@@ -52,8 +61,10 @@ h1 {
     margin-bottom: 20px;
     font-weight: bold;
     color: #555;
+    font-size: 18px;
 }
 
+/* Answer Styles */
 .answers {
     list-style-type: none;
     padding: 0;
@@ -79,6 +90,7 @@ h1 {
     color: #0f5132;
 }
 
+/* Button Styles */
 button {
     background-color: #007bff;
     color: white;
@@ -99,6 +111,7 @@ button:disabled {
     cursor: not-allowed;
 }
 
+/* Results Styles */
 #results {
     margin-top: 20px;
     font-size: 18px;
